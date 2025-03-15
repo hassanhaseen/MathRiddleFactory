@@ -64,14 +64,10 @@ if generate_btn:
             riddle_part = full_text
             answer_part = "Oops! Couldn't find the answer."
 
-        # Clean formatting - remove redundant "Riddle:" if exists
-    if "Riddle:" in riddle_part:
-        riddle_part = riddle_part.split("Riddle:")[-1].strip()
-
-    # Display with better spacing
-    with st.expander(f"❓ Riddle {i+1}"):
-        st.markdown(f"**📝 Riddle:**\n\n{riddle_part}")
-        st.success(f"✅ Answer: {answer_part.strip()}")
+        # Display riddle
+        with st.expander(f"❓ Riddle {i+1}"): 
+            st.markdown{f"📝 riddle_part.strip()}"):
+            st.success(f"✅ Answer: {answer_part.strip()}")
 
 st.markdown(
     """
