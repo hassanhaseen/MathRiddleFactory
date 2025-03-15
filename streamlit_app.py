@@ -4,7 +4,7 @@ import time
 
 # Basic page setup
 st.set_page_config(
-    page_title="Math Riddle Factory 🤖",
+    page_title="Math Riddle Factory",
     page_icon="🧮",
     layout="centered"
 )
@@ -68,11 +68,43 @@ if generate_btn:
         with st.expander(f"❓ Riddle {i+1}: {riddle_part.strip()}"):
             st.success(f"✅ Answer: {answer_part.strip()}")
 
-# Footer
-st.markdown("---")
 st.markdown(
-    "<div style='text-align: center;'>"
-    "Created with ❤️ by Team CodeRunners"
-    "</div>",
+    """
+    <style>
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #888888;
+        }
+        .footer span {
+            position: relative;
+            cursor: pointer;
+            color: #FF4B4B;
+        }
+        .footer span::after {
+            content: "Hassan Haseen & Sameen Muzaffar";
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            font-size: 12px;
+        }
+        .footer span:hover::after {
+            opacity: 1;
+        }
+    </style>
+
+    <div class='footer'>
+        Created with ❤️ by <span>Team CodeRunners</span>
+    </div>
+    """,
     unsafe_allow_html=True
 )
