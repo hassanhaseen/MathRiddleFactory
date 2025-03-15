@@ -68,14 +68,11 @@ if generate_btn:
         with st.expander(f"❓ Riddle {i+1}: {riddle_part.strip()}"):
             st.success(f"✅ Answer: {answer_part.strip()}")
 
-    st.markdown("---")
-    st.caption("🔧 Powered by Hassan Haseen | Roll No: 21F-9221")
-
 # Footer
 st.markdown("---")
 st.markdown(
     "<div style='text-align: center;'>"
-    "Made with ❤️ using Streamlit and HuggingFace Transformers"
+    "Created with ❤️ by Team CodeRunners"
     "</div>",
     unsafe_allow_html=True
 )
