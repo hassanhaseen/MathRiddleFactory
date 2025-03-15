@@ -64,9 +64,9 @@ if generate_btn:
             riddle_part = full_text
             answer_part = "Oops! Couldn't find the answer."
 
-        # Display riddle
-with st.expander(f"❓ Riddle {i+1}"): 
-    st.markdown(f"📝 {riddle_part.strip()}")
+        with st.expander(f"❓ Riddle {i+1}:"):
+    st.write("")  # Adds a line of space
+    st.write(riddle_part.strip())  # Shows the riddle
     st.success(f"✅ Answer: {answer_part.strip()}")
 
 
