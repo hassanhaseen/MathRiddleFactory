@@ -64,7 +64,7 @@ if generate_btn:
             riddle_part = full_text
             answer_part = "Oops! Couldn't find the answer."
 
-  with st.expander(f"❓ Riddle {i+1} \n : {riddle_part.strip()}"):
+  with st.expander(f"❓ Riddle {i+1} \n :{riddle_part.strip()}"):
     st.success(f"✅ Answer: {answer_part.strip()}")
 
 
