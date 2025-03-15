@@ -28,8 +28,7 @@ Welcome to **Math Riddle Factory** — an AI-powered riddle generator designed t
 
 ## ✍️ Medium Blog
 
-🔗 [Read our Medium Blog](https://medium.com/@hassanhaseen/math-riddle-factory-fine-tuning-gpt-2-to-generate-math-puzzles-cb41809d7386)  
-*(replace with actual link once published)*
+🔗 [Read our Medium Blog](https://medium.com/@hassanhaseen/math-riddle-factory-fine-tuning-gpt-2-to-generate-brain-teasing-math-riddles-acd2add241d2)  
 
 ---
 
