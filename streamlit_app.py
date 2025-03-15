@@ -1,43 +1,81 @@
 import streamlit as st
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
+import time
 
-# Title and Description
+# Basic page setup
+st.set_page_config(
+    page_title="Math Riddle Factory 🤖",
+    page_icon="🧮",
+    layout="centered"
+)
+
+# Title & Description
 st.title("🧠 Math Riddle Factory")
-st.subheader("Generate fun, creative math riddles with AI!")
+st.caption("Generate creative math riddles using AI!\n")
+st.markdown("---")
 
-# Load model and tokenizer from Hugging Face Hub
+# Load model and tokenizer from HuggingFace Hub
 @st.cache_resource
 def load_model():
-    tokenizer = GPT2Tokenizer.from_pretrained("hassanhaseen/MathRiddleGPT2")
-    model = GPT2LMHeadModel.from_pretrained("hassanhaseen/MathRiddleGPT2")
+    with st.spinner("Loading Math Riddle GPT-2 Model... Please wait."):
+        tokenizer = GPT2Tokenizer.from_pretrained("hassanhaseen/MathRiddleGPT2")
+        model = GPT2LMHeadModel.from_pretrained("hassanhaseen/MathRiddleGPT2")
     return tokenizer, model
 
 tokenizer, model = load_model()
 
-# User input controls
-num_riddles = st.slider("How many riddles do you want to generate?", 1, 5, 3)
-temperature = st.slider("Temperature (controls creativity)", 0.1, 1.0, 0.7)
+# Sidebar with controls
+st.sidebar.header("🔧 Controls")
+num_riddles = st.sidebar.slider("Number of riddles", 1, 5, 3)
+temperature = st.sidebar.slider("Temperature (creativity)", 0.1, 1.0, 0.7)
 
-# Generate button
-if st.button("Generate Riddles!"):
-    prompt = "<|startoftext|>Riddle:"
-    inputs = tokenizer(prompt, return_tensors="pt")
+# Generate riddles button
+generate_btn = st.button("✨ Generate Riddles!")
 
-    outputs = model.generate(
-        **inputs,
-        max_length=100,
-        num_return_sequences=num_riddles,
-        no_repeat_ngram_size=2,
-        do_sample=True,
-        top_k=50,
-        top_p=0.95,
-        temperature=temperature
-    )
+if generate_btn:
+    with st.spinner("Generating riddles... Give me a sec! 🤖"):
+        prompt = "<|startoftext|>Riddle:"
+        inputs = tokenizer(prompt, return_tensors="pt")
 
-    st.subheader("Here are your riddles!")
+        outputs = model.generate(
+            **inputs,
+            max_length=100,
+            num_return_sequences=num_riddles,
+            no_repeat_ngram_size=2,
+            do_sample=True,
+            top_k=50,
+            top_p=0.95,
+            temperature=temperature
+        )
+
+        time.sleep(1)  # just to show spinner for a sec :)
+
+    st.markdown("---")
+    st.subheader("📝 Your Math Riddles")
+
+    # Display riddles one by one with click-to-reveal answers
     for i, output in enumerate(outputs):
-        text = tokenizer.decode(output, skip_special_tokens=True)
-        st.markdown(f"**Riddle {i+1}:** {text}")
+        full_text = tokenizer.decode(output, skip_special_tokens=True)
+        
+        # Separate Riddle and Answer
+        try:
+            riddle_part, answer_part = full_text.split("Answer:")
+        except ValueError:
+            riddle_part = full_text
+            answer_part = "Oops! Couldn't find the answer."
+
+        # Display riddle
+        with st.expander(f"❓ Riddle {i+1}: {riddle_part.strip()}"):
+            st.success(f"✅ Answer: {answer_part.strip()}")
+
+    st.markdown("---")
+    st.caption("🔧 Powered by Hassan Haseen | Roll No: 21F-9221")
 
 # Footer
-st.caption("Made by Hassan Haseen | Roll No: 21F-9221")
+st.markdown("---")
+st.markdown(
+    "<div style='text-align: center;'>"
+    "Made with ❤️ using Streamlit and HuggingFace Transformers"
+    "</div>",
+    unsafe_allow_html=True
+)
